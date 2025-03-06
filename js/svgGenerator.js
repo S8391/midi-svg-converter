@@ -6,6 +6,22 @@ export class SVGGenerator {
         svg.setAttribute("height", height);
         svg.setAttribute("viewBox", `0 0 ${width} ${height}`);
 
+        // Add style definitions for hover effects
+        const style = document.createElementNS(svgNS, "style");
+        style.textContent = `
+            .note-rect {
+                transition: all 0.2s ease;
+                cursor: pointer;
+            }
+            .note-rect:hover {
+                width: 8px !important;
+                height: 8px !important;
+                transform: translate(-1.5px, -1.5px);
+                filter: brightness(1.2);
+            }
+        `;
+        svg.appendChild(style);
+
         // Add background
         const background = document.createElementNS(svgNS, "rect");
         background.setAttribute("width", "100%");
@@ -82,28 +98,25 @@ export class SVGGenerator {
     static addNotes(svg, notes, timeScale, noteScale) {
         const svgNS = "http://www.w3.org/2000/svg";
         const notesGroup = document.createElementNS(svgNS, "g");
+        notesGroup.setAttribute("class", "notes-group");
 
-        notes.forEach(event => {
+        notes.forEach((event, index) => {
             const x = event.time * timeScale + 50;
             const y = (127 - event.note) * noteScale + 50;
 
             const rect = document.createElementNS(svgNS, "rect");
+            rect.setAttribute("class", "note-rect");
             rect.setAttribute("x", x);
             rect.setAttribute("y", y);
-            rect.setAttribute("width", 5);
-            rect.setAttribute("height", 5);
+            rect.setAttribute("width", "5");
+            rect.setAttribute("height", "5");
             rect.setAttribute("fill", "#00ffff");
             rect.setAttribute("opacity", event.velocity / 127);
-
-            // Add hover effect
-            rect.addEventListener("mouseover", () => {
-                rect.setAttribute("width", "8");
-                rect.setAttribute("height", "8");
-            });
-            rect.addEventListener("mouseout", () => {
-                rect.setAttribute("width", "5");
-                rect.setAttribute("height", "5");
-            });
+            
+            // Add data attributes for note information
+            rect.setAttribute("data-note", event.note);
+            rect.setAttribute("data-time", event.time);
+            rect.setAttribute("data-velocity", event.velocity);
 
             notesGroup.appendChild(rect);
         });

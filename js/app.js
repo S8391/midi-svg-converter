@@ -6,6 +6,7 @@ class App {
         this.generatedSVG = null;
         this.initializeElements();
         this.attachEventListeners();
+        this.createNoteInfoDisplay();
     }
 
     initializeElements() {
@@ -15,9 +16,73 @@ class App {
         this.errorMessage = document.getElementById('errorMessage');
     }
 
+    createNoteInfoDisplay() {
+        this.noteInfo = document.createElement('div');
+        this.noteInfo.className = 'note-info';
+        this.noteInfo.style.display = 'none';
+        document.body.appendChild(this.noteInfo);
+    }
+
     attachEventListeners() {
         this.midiFileInput.addEventListener('change', this.handleFileSelect.bind(this));
         this.downloadButton.addEventListener('click', this.handleDownload.bind(this));
+        
+        // Add hover event listeners for the SVG container
+        this.svgContainer.addEventListener('mouseover', (e) => {
+            if (e.target.classList.contains('note-rect')) {
+                this.showNoteInfo(e);
+            }
+        });
+
+        this.svgContainer.addEventListener('mousemove', (e) => {
+            if (e.target.classList.contains('note-rect')) {
+                this.updateNoteInfoPosition(e);
+            }
+        });
+
+        this.svgContainer.addEventListener('mouseout', (e) => {
+            if (e.target.classList.contains('note-rect')) {
+                this.hideNoteInfo();
+            }
+        });
+    }
+
+    showNoteInfo(event) {
+        const note = event.target.getAttribute('data-note');
+        const time = event.target.getAttribute('data-time');
+        const velocity = event.target.getAttribute('data-velocity');
+        
+        const noteName = this.getNoteNameFromMIDI(parseInt(note));
+        
+        this.noteInfo.innerHTML = `
+            <div class="note-info-content">
+                <strong>Note:</strong> ${noteName} (${note})<br>
+                <strong>Time:</strong> ${time}<br>
+                <strong>Velocity:</strong> ${velocity}
+            </div>
+        `;
+        this.noteInfo.style.display = 'block';
+        this.updateNoteInfoPosition(event);
+    }
+
+    updateNoteInfoPosition(event) {
+        const rect = this.svgContainer.getBoundingClientRect();
+        const x = event.clientX - rect.left;
+        const y = event.clientY - rect.top;
+        
+        this.noteInfo.style.left = `${event.clientX + 10}px`;
+        this.noteInfo.style.top = `${event.clientY + 10}px`;
+    }
+
+    hideNoteInfo() {
+        this.noteInfo.style.display = 'none';
+    }
+
+    getNoteNameFromMIDI(midiNote) {
+        const notes = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B'];
+        const octave = Math.floor(midiNote / 12) - 1;
+        const noteName = notes[midiNote % 12];
+        return `${noteName}${octave}`;
     }
 
     async handleFileSelect(event) {

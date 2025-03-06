@@ -83,4 +83,29 @@ svg {
     color: #ff6b6b;
     margin-top: 10px;
     min-height: 20px;
+}
+
+/* Note information tooltip styles */
+.note-info {
+    position: fixed;
+    z-index: 1000;
+    pointer-events: none;
+    background-color: rgba(30, 30, 46, 0.95);
+    border: 1px solid #3b3b5b;
+    border-radius: 4px;
+    padding: 8px 12px;
+    font-size: 14px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(4px);
+}
+
+.note-info-content {
+    color: #e0e0e0;
+    line-height: 1.4;
+    text-align: left;
+}
+
+.note-info strong {
+    color: #00ffff;
+    font-weight: 600;
 } 
