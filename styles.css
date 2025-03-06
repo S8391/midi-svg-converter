@@ -12,9 +12,10 @@ body {
 }
 
 .container {
-    max-width: 1200px;
-    width: 100%;
+    max-width: 1400px;
+    width: 95%;
     margin: 0 auto;
+    padding: 20px;
 }
 
 h1 {
@@ -47,12 +48,14 @@ h1 {
 }
 
 .svg-container {
-    margin-top: 20px;
+    margin: 30px auto;
     display: none;
     background-color: #1e1e2e;
-    padding: 20px;
+    padding: 30px;
     border-radius: 8px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    overflow-x: auto;
+    max-width: 100%;
 }
 
 svg {
@@ -60,11 +63,13 @@ svg {
     background-color: #1e1e2e;
     max-width: 100%;
     height: auto;
+    display: block;
+    margin: 0 auto;
 }
 
 .download-button {
-    margin-top: 20px;
-    padding: 10px 20px;
+    margin-top: 30px;
+    padding: 12px 24px;
     background-color: #3b3b5b;
     color: #ffffff;
     border: none;
@@ -93,19 +98,21 @@ svg {
     background-color: rgba(30, 30, 46, 0.95);
     border: 1px solid #3b3b5b;
     border-radius: 4px;
-    padding: 8px 12px;
+    padding: 12px 16px;
     font-size: 14px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
     backdrop-filter: blur(4px);
+    min-width: 150px;
 }
 
 .note-info-content {
     color: #e0e0e0;
-    line-height: 1.4;
+    line-height: 1.6;
     text-align: left;
 }
 
 .note-info strong {
     color: #00ffff;
     font-weight: 600;
+    margin-right: 8px;
 } 

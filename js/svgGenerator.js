@@ -1,5 +1,5 @@
 export class SVGGenerator {
-    static generate(midiData, width = 800, height = 600) {
+    static generate(midiData, width = 1200, height = 800) {
         const svgNS = "http://www.w3.org/2000/svg";
         const svg = document.createElementNS(svgNS, "svg");
         svg.setAttribute("width", width);
@@ -14,9 +14,9 @@ export class SVGGenerator {
                 cursor: pointer;
             }
             .note-rect:hover {
-                width: 8px !important;
-                height: 8px !important;
-                transform: translate(-1.5px, -1.5px);
+                width: 10px !important;
+                height: 10px !important;
+                transform: translate(-2.5px, -2.5px);
                 filter: brightness(1.2);
             }
         `;
@@ -35,13 +35,13 @@ export class SVGGenerator {
             return svg;
         }
 
-        // Calculate scales
+        // Calculate scales with more spacing
         const { timeScale, noteScale } = this.calculateScales(notes, width, height);
 
-        // Add grid
+        // Add grid with more spacing
         this.addGrid(svg, width, height);
 
-        // Add notes
+        // Add notes with improved spacing
         this.addNotes(svg, notes, timeScale, noteScale);
 
         return svg;
@@ -61,8 +61,10 @@ export class SVGGenerator {
 
     static calculateScales(notes, width, height) {
         const maxTime = notes[notes.length - 1].time;
-        const timeScale = maxTime ? (width - 100) / maxTime : 1;
-        const noteScale = (height - 100) / 127;
+        // Increase horizontal spacing by reducing the usable width less
+        const timeScale = maxTime ? (width - 150) / maxTime : 1;
+        // Increase vertical spacing by using more of the height
+        const noteScale = (height - 150) / 127 * 1.2; // 20% more vertical spacing
         return { timeScale, noteScale };
     }
 
@@ -72,22 +74,22 @@ export class SVGGenerator {
         gridGroup.setAttribute("stroke", "#2b2b3b");
         gridGroup.setAttribute("stroke-width", "0.5");
 
-        // Vertical lines
-        for (let x = 50; x < width - 50; x += 50) {
+        // Vertical lines with increased spacing
+        for (let x = 75; x < width - 75; x += 75) {  // Increased from 50 to 75
             const line = document.createElementNS(svgNS, "line");
             line.setAttribute("x1", x);
-            line.setAttribute("y1", 50);
+            line.setAttribute("y1", 75);
             line.setAttribute("x2", x);
-            line.setAttribute("y2", height - 50);
+            line.setAttribute("y2", height - 75);
             gridGroup.appendChild(line);
         }
 
-        // Horizontal lines
-        for (let y = 50; y < height - 50; y += 20) {
+        // Horizontal lines with increased spacing
+        for (let y = 75; y < height - 75; y += 30) {  // Increased from 20 to 30
             const line = document.createElementNS(svgNS, "line");
-            line.setAttribute("x1", 50);
+            line.setAttribute("x1", 75);
             line.setAttribute("y1", y);
-            line.setAttribute("x2", width - 50);
+            line.setAttribute("x2", width - 75);
             line.setAttribute("y2", y);
             gridGroup.appendChild(line);
         }
@@ -101,15 +103,15 @@ export class SVGGenerator {
         notesGroup.setAttribute("class", "notes-group");
 
         notes.forEach((event, index) => {
-            const x = event.time * timeScale + 50;
-            const y = (127 - event.note) * noteScale + 50;
+            const x = event.time * timeScale + 75;  // Increased padding from 50 to 75
+            const y = (127 - event.note) * noteScale + 75;  // Increased padding from 50 to 75
 
             const rect = document.createElementNS(svgNS, "rect");
             rect.setAttribute("class", "note-rect");
             rect.setAttribute("x", x);
             rect.setAttribute("y", y);
-            rect.setAttribute("width", "5");
-            rect.setAttribute("height", "5");
+            rect.setAttribute("width", "7");  // Increased from 5 to 7
+            rect.setAttribute("height", "7");  // Increased from 5 to 7
             rect.setAttribute("fill", "#00ffff");
             rect.setAttribute("opacity", event.velocity / 127);
             
