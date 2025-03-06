@@ -48,21 +48,12 @@ midi-svg-converter/
 - Adds interactive hover effects
 - Scales visualization based on MIDI data
 
-
-- Edge
-
 ## 📝 Notes
 
 - The visualization scales automatically based on the MIDI file content
 - Note opacity reflects velocity values
 - Grid lines help with timing and pitch reference
 - SVG output is optimized for web use
-
-
-## 📄 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
 
 ---
 
