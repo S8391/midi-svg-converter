@@ -1,0 +1,86 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #1e1e2e;
+    color: #e0e0e0;
+    text-align: center;
+    padding: 20px;
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.container {
+    max-width: 1200px;
+    width: 100%;
+    margin: 0 auto;
+}
+
+h1 {
+    color: #ffffff;
+    margin-bottom: 2rem;
+}
+
+.upload-section {
+    margin: 20px 0;
+}
+
+.file-input-label {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #3b3b5b;
+    color: #ffffff;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+.file-input-label:hover {
+    background-color: #4b4b7b;
+}
+
+#midiFileInput {
+    display: none;
+}
+
+.svg-container {
+    margin-top: 20px;
+    display: none;
+    background-color: #1e1e2e;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+svg {
+    border: 1px solid #555;
+    background-color: #1e1e2e;
+    max-width: 100%;
+    height: auto;
+}
+
+.download-button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #3b3b5b;
+    color: #ffffff;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    display: none;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+.download-button:hover {
+    background-color: #4b4b7b;
+}
+
+.error-message {
+    color: #ff6b6b;
+    margin-top: 10px;
+    min-height: 20px;
+} 

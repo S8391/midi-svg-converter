@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MIDI to SVG Converter</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>MIDI to SVG Converter</h1>
+        <div class="upload-section">
+            <label for="midiFileInput" class="file-input-label">
+                Choose MIDI File
+                <input type="file" id="midiFileInput" accept=".mid,.midi" />
+            </label>
+        </div>
+        <div id="svgContainer" class="svg-container"></div>
+        <button id="downloadButton" class="download-button">Download SVG</button>
+        <div id="errorMessage" class="error-message"></div>
+    </div>
+    <script type="module" src="js/midiParser.js"></script>
+    <script type="module" src="js/svgGenerator.js"></script>
+    <script type="module" src="js/app.js"></script>
+</body>
+</html> 
